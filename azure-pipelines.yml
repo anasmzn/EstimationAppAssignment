@@ -20,6 +20,17 @@ steps:
   inputs:
     restoreSolution: '**/*.sln'
 
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*Test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    codeCoverageEnabled: true
+    testRunTitle: 'Running Unit testing'
+    
 - task: XamarinAndroid@1
   inputs:
     projectFile: '**/*droid*.csproj'
